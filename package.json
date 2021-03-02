@@ -1,0 +1,38 @@
+{
+	"name": "highill-araddin-server",
+	"version": "1.0.0",
+	"description": "sangmyung univ. computer-science 2021 capston project",
+	"scripts": {
+		"build-ts": "tsc",
+		"serve": "node dist/server.js",
+		"start": "npx nodemon --exec ts-node ./src/server.ts",
+		"watch-node": "nodemon dist/server.js",
+		"watch-ts": "tsc -w"
+	},
+	"keywords": [],
+	"author": "dowonpark",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/smu2021-highill/ARaddin-BACK.git"
+	},
+	"bugs": {
+		"url": "https://github.com/smu2021-highill/ARaddin-BACK/issues"
+	},
+	"homepage": "https://github.com/smu2021-highill/ARaddin-BACK#readme",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"errorhandler": "^1.5.1",
+		"express": "^4.17.1",
+		"winston": "^3.3.3"
+	},
+	"devDependencies": {
+		"@types/errorhandler": "^1.5.0",
+		"@types/express": "^4.17.11",
+		"@types/node": "^14.14.31",
+		"@types/winston": "^2.4.4",
+		"nodemon": "^2.0.7",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.2.2"
+	}
+}
