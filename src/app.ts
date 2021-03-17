@@ -1,5 +1,6 @@
 import express from 'express';
 import { initialFirebase } from './utils/firebase';
+import { userRouter } from './controllers/user';
 
 // Create Express server
 const app = express();
@@ -12,5 +13,8 @@ app.get('/', (req, res) => {
 
 // firebase connection & use firestore
 export const firestore = initialFirebase().firestore();
+
+// routes
+app.use('/api/user', userRouter);
 
 export default app;
