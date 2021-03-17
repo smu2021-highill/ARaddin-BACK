@@ -11,6 +11,6 @@ app.get('/', (req, res) => {
 });
 
 // firebase connection & use firestore
-export const firebase = initialFirebase().firestore();
+export const firestore = initialFirebase().firestore();
 
 export default app;
