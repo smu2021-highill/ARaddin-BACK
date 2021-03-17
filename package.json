@@ -24,6 +24,7 @@
 		"dotenv": "^8.2.0",
 		"errorhandler": "^1.5.1",
 		"express": "^4.17.1",
+		"firebase-admin": "^9.5.0",
 		"winston": "^3.3.3"
 	},
 	"devDependencies": {
