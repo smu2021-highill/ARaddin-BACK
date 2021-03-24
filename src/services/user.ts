@@ -10,47 +10,32 @@ async function createUser(email: string, user: User) {
 async function readUser(email: string) {
 	const userRef = firestore.collection(collection);
 	const user = await userRef.doc(email).get();
-	if (!user.exists) {
-		console.log(`${email} doesn't exist.`);
-		return null;
-	} else {
-		console.log(`${email} login`);
-		return user.data();
-	}
+	return user.createTime === undefined ? null : user.data();
 }
 
 // 회원 정보 삭제
 async function deleteUser(email: string) {
 	const userRef = firestore.collection(collection);
-	const user = await userRef
-		.doc(email)
-		.delete()
-		.then((result) => {
-			console.log(`Document deleted at: ${result.writeTime.toDate()}`);
-		});
+	const user = await userRef.doc(email).delete();
+	return !user ? null : user;
 }
 
 // 닉네임 수정
 async function updateNickname(email: string, nickname: string) {
 	const userRef = firestore.collection(collection);
 	const user = await userRef.doc(email).update({ nickname: nickname });
-	// 	.then((result) => {
-	// 	return result.writeTime.toDate;
-	// }).catch(() => {
-	// 	return null;
-	// })
-	return !user ? true : false;
+	console.log(user);
+	return !user ? false : true;
 }
 
 // firebase token 검증
 async function verifyUser(token: string) {
-	const userInfo = await firebaseAuth.verifyIdToken(token);
+	const userInfo = await firebaseAuth.getUser(token); //verifyIdToken(token);
 	try {
 		const email = userInfo.email;
-		console.log(email);
-		return email;
+		return email ? email : null;
 	} catch (err) {
-		console.error(`firebase: ${err}`);
+		console.log(err);
 	}
 }
 
