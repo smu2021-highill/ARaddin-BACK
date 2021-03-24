@@ -12,8 +12,9 @@ app.get('/', (req, res) => {
 });
 
 // firebase connection & use firestore
-export const firestore = initialFirebase().firestore();
-
+const firebase = initialFirebase();
+export const firestore = firebase.firestore();
+export const firebaseAuth = firebase.auth();
 // routes
 app.use('/api/user', userRouter);
 
