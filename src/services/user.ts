@@ -30,7 +30,7 @@ async function updateNickname(email: string, nickname: string) {
 
 // firebase token 검증
 async function verifyUser(token: string) {
-	const userInfo = await firebaseAuth.getUser(token); //verifyIdToken(token);
+	const userInfo = await firebaseAuth.verifyIdToken(token); // getUser(token);
 	try {
 		const email = userInfo.email;
 		return email ? email : null;
