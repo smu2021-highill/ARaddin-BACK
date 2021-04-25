@@ -1,4 +1,4 @@
-import User from '../models_/user';
+import User from '../models/user';
 import * as UserDao from '../dao/user';
 import { firebaseAuth } from '../app';
 

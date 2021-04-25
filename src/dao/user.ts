@@ -1,5 +1,5 @@
 import { firestore } from '../app';
-import User from '../models_/user';
+import User from '../models/user';
 
 const collection = `users`;
 

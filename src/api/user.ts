@@ -5,7 +5,7 @@ import {
   createUser,
   getUser,
   modifyNickname,
-} from '../service_/user';
+} from '../service/user';
 
 const signUpSchema = yup.object({
   token: yup.string().required(),
