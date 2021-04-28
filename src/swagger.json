@@ -31,7 +31,7 @@
     "/user": {
       "post": {
         "tags": ["user"],
-        "summary": "Create user",
+        "summary": "유저를 생성한다",
         "parameters": [
           {
             "in": "body",
@@ -53,7 +53,7 @@
       },
       "put": {
         "tags": ["user"],
-        "summary": "Update user nickname",
+        "summary": "닉네임 변경",
         "parameters": [
           {
             "in": "body",
@@ -75,12 +75,55 @@
       },
       "delete": {
         "tags": ["user"],
-        "summary": "Delete user"
+        "summary": "유저 삭제 - 구현 안됨"
       }
     },
     "/user/login": {
       "post": {
-        "tags": ["user"]
+        "tags": ["user"],
+        "summary": "로그인"
+      }
+    },
+    "/room": {
+      "get": {
+        "tags": ["room"],
+        "summary": "방에 입장한다.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "방 코드",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/room_res"
+            }
+          },
+          "400": {
+            "description": "Faild",
+            "schema": {
+              "room": ""
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["room"],
+        "summary": "방을 생성한다."
+      },
+      "put": {
+        "tags": ["room"],
+        "summary": "방의 설정을 수정한다."
+      },
+      "delete": {
+        "tags": ["room"],
+        "summary": "방에서 나온다."
       }
     }
   },
@@ -92,7 +135,7 @@
         }
       }
     },
-    "userInfoReq": {
+    "userinfo_req": {
       "type": "object",
       "properties": {
         "token": {
@@ -103,7 +146,7 @@
         }
       }
     },
-    "userInfoRes": {
+    "userinfo_res": {
       "type": "object",
       "properties": {
         "email": {
@@ -113,7 +156,7 @@
         "photoPath": { "type": "string" }
       }
     },
-    "gameUser": {
+    "gameuser": {
       "type": "object",
       "properties": {
         "email": {
@@ -121,6 +164,37 @@
         },
         "nickname": {
           "type": "string"
+        }
+      }
+    },
+    "setting": {
+      "type": "object",
+      "properties": {
+        "goal": {
+          "type": "number"
+        },
+        "timeLimit": {
+          "type": "number"
+        },
+        "place": {
+          "type": "number"
+        }
+      }
+    },
+    "room_res": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/gameuser"
+          }
+        },
+        "setting": {
+          "$ref": "#/definitions/setting"
+        },
+        "master": {
+          "$ref": "#/definitions/gameuser"
         }
       }
     }
