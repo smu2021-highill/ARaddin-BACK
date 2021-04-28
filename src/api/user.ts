@@ -25,7 +25,6 @@ const loginSchema = yup.object({
 });
 async function login(req: Request, res: Response) {
   const sess = req.session.user;
-  console.log(`${sess.email}`);
   let user;
   if (!sess) {
     const { token } = loginSchema.validateSync(req.body);
@@ -57,7 +56,7 @@ async function modifyUser(req: Request, res: Response) {
     isModified = await modifyNickname(sess.email, nickname);
   }
   return isModified
-    ? res.status(200).json({ user: sess.email })
+    ? res.status(200).json({ user: sess })
     : res.status(400).json({ error: `bad request` });
 }
 
