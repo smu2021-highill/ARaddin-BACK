@@ -1,5 +1,3 @@
-import Game from './game';
-
 class Room {
   code: string;
   master: GameUser;
