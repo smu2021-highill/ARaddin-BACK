@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "ARaddin",
+    "description": "sangmyung univ. computer-science 2021 capston project REST-API documents",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/MIT"
+    }
+  },
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "user",
+      "description": "유저"
+    },
+    {
+      "name": "room",
+      "description": "방"
+    },
+    {
+      "name": "game",
+      "description": "게임"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Create user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User info"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/userInfoReq"
+            }
+          },
+          "400": {
+            "description": "Faild. Bad post data."
+          }
+        }
+      },
+      "put": {
+        "tags": ["user"],
+        "summary": "Update user nickname",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "nickname 수정",
+            "schema": {
+              "$ref": "#/definitions/userInfoReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/userInfoReq"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["user"],
+        "summary": "Delete user"
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["user"]
+      }
+    }
+  },
+  "definitions": {
+    "token": {
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "userInfoReq": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        }
+      }
+    },
+    "userInfoRes": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "nickname": { "type": "string" },
+        "photoPath": { "type": "string" }
+      }
+    },
+    "gameUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
