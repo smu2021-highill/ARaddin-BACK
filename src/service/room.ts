@@ -17,7 +17,7 @@ async function initialRoom(master: GameUser) {
     const newRoom = new Room(code, master, [master]);
     // newRoom.setInitialSetting();
     const result = RoomDao.insert(newRoom);
-    return result ? newRoom : null;
+    return newRoom;
   } else {
     //방 존재
     return room;
@@ -36,7 +36,7 @@ async function modifyRoomSetting(
     place: place,
   };
   const room = await RoomDao.update(code, setting, null);
-  return room ? setting : null;
+  return room;
 }
 
 async function getRoom(code: string, email: string, nickname: string) {
@@ -48,7 +48,7 @@ async function getRoom(code: string, email: string, nickname: string) {
   );
   room.users = room.users.concat(user);
   const result = await RoomDao.update(code, null, room.users);
-  return result ? room.roomInfo() : null;
+  return result;
 }
 
 async function exitRoom(code: string, email: string, nickname: string) {

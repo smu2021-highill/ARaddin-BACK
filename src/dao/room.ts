@@ -7,7 +7,8 @@ async function insert(room: Room) {
   const ref = firestore.collection(collection);
   const info = room.roomInfo();
   const doc = await ref.doc(room.code).set(info);
-  return doc.writeTime.toDate().getMinutes() === new Date().getMinutes();
+  return (await ref.doc(room.code).get()).data();
+  // return doc.writeTime.toDate().getMinutes() === new Date().getMinutes();
 }
 
 async function update(
@@ -29,24 +30,8 @@ async function update(
     obj.users = users;
   }
   const doc = await ref.doc(code).update(obj);
-
-  return !!doc.writeTime.toDate();
-}
-
-async function updateUsers(code: string, users: Array<GameUser>) {
-  const ref = firestore.collection(collection);
-  const doc = await ref.doc(code).update({ users: users });
-  return doc.writeTime.toDate();
-}
-
-async function updateRoom(
-  code: string,
-  users: Array<GameUser>,
-  master: GameUser
-) {
-  const ref = firestore.collection(collection);
-  const doc = await ref.doc(code).update({ users: users, master: master });
-  return doc.writeTime.toDate().getMinutes() === new Date().getMinutes();
+  console.log((await ref.doc(code).get()).data());
+  return !!doc.writeTime.toDate() ? (await ref.doc(code).get()).data() : null;
 }
 
 async function find(code: string) {
@@ -64,7 +49,7 @@ function deleteRoom() {
   const ref = firestore.collection(collection);
 }
 
-export { insert, update, updateUsers, updateRoom, find };
+export { insert, update, find };
 
 // class RoomDao {
 //   ref: FirebaseFirestore.CollectionReference;

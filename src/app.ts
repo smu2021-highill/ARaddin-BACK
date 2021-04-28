@@ -1,6 +1,8 @@
 import express from 'express';
 import morgan from 'morgan';
 import session from 'express-session';
+import swaggerUi from 'swagger-ui-express';
+import * as swaggerDocument from './swagger.json';
 import { sess } from './config/redis';
 import { initialFirebase } from './config/firebase';
 import router from './api/_index';
@@ -13,6 +15,9 @@ app.use(morgan('dev'));
 
 // redis - 세션 관리
 app.use(session(sess));
+
+// swagger
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //apis
 app.use('/api', router);

@@ -30,8 +30,8 @@ async function changeSetting(req: Request, res: Response) {
   const { goal, timeLimit, place } = changeSettingSchema.validateSync(req.body);
   const room = await modifyRoomSetting(code, goal, timeLimit, place);
   return !!room
-    ? res.status(200).json({ setting: room })
-    : res.status(400).json({ setting: null });
+    ? res.status(200).json({ room: room })
+    : res.status(400).json({ room: null });
 }
 
 async function enterRoom(req: Request, res: Response) {
@@ -48,7 +48,7 @@ async function leaveRoom(req: Request, res: Response) {
 
   return (await exitRoom(code, email, nickname))
     ? res.status(204)
-    : res.status(400).json({ leave: false });
+    : res.status(400).json({ room: null });
 }
 
 const router = express.Router();
